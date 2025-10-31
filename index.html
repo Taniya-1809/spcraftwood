@@ -26,31 +26,48 @@
   min-height: 100vh;
 " >
   <!-- Header -->
-  <header class="header" role="banner">
-    <a href="#" class="logo" aria-label="S P CRAFTWOOD - Home">
-      <div class="logo-container">
-        <img src="images/IMG_0033.JPG" alt="S P CRAFTWOOD Logo" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-brand">S P</span>
-          <span class="logo-name">CRAFTWOOD</span>
+  <header class="site-header" role="banner">
+    <div class="site-header-inner">
+      <a href="#home" class="brand" aria-label="S P CRAFTWOOD - Home">
+        <div class="brand-logo">
+          <img src="images/IMG_0033.JPG" alt="S P CRAFTWOOD Logo">
         </div>
-      </div>
-    </a>
+        <div class="brand-text">
+          <span class="brand-top">S P</span>
+          <span class="brand-bottom">CRAFTWOOD</span>
+        </div>
+      </a>
 
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-      <a href="#home">home</a>
-      <a href="#service">service</a>
-      <a href="#about">about</a>
-      <a href="#gallery">gallery</a>
-      <a href="#materials">materials</a>
-      <a href="#process">process</a>
-      <a href="#review">review</a>
-      <a href="#contact">contact</a>
+      <nav class="nav-desktop" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#materials">Materials</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#review">Review</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="nav-mobile" id="navMobile" aria-label="Mobile navigation">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#review">Review</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
-
-    <button id="menu-bars" aria-expanded="false" aria-label="Toggle menu" class="menu-btn">
-      <i class="fas fa-bars"></i>
-    </button>
   </header>
 
   <!-- Home -->

@@ -1,5 +1,55 @@
 
 
+// New header: hamburger + mobile nav
+const hamburger = document.getElementById('hamburger');
+const navMobile = document.getElementById('navMobile');
+
+function closeMobileNav() {
+  if (navMobile) navMobile.classList.remove('open');
+  if (hamburger) hamburger.classList.remove('active');
+  if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflowY = 'auto';
+  document.body.style.overflowX = 'hidden';
+}
+
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+    const nextExpanded = !expanded;
+    hamburger.setAttribute('aria-expanded', String(nextExpanded));
+    hamburger.classList.toggle('active');
+    navMobile.classList.toggle('open');
+    if (nextExpanded) {
+      document.body.style.overflowY = 'hidden';
+      document.body.style.overflowX = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+      document.body.style.overflowX = 'hidden';
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navMobile.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
+
+  // Close on link click
+  navMobile.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => closeMobileNav());
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileNav();
+  });
+
+  // Close on scroll
+  window.addEventListener('scroll', closeMobileNav);
+}
+
 // DOM helpers
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
@@ -15,6 +65,16 @@ if (menuBtn && navbar) {
     const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
     menuBtn.setAttribute('aria-expanded', String(!expanded));
     navbar.classList.toggle('show');
+    // Lock body scroll on small screens when menu is open to avoid layout shifts
+    if (window.innerWidth <= 768) {
+      if (!expanded) {
+        document.body.style.overflowY = 'hidden';
+        document.body.style.overflowX = 'hidden';
+      } else {
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+      }
+    }
     
     // Toggle menu icon
     const icon = menuBtn.querySelector('i');
@@ -29,6 +89,10 @@ if (menuBtn && navbar) {
     if (!navbar.contains(e.target) && !menuBtn.contains(e.target)) {
       navbar.classList.remove('show');
       menuBtn.setAttribute('aria-expanded', 'false');
+      if (window.innerWidth <= 768) {
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+      }
       const icon = menuBtn.querySelector('i');
       if (icon) {
         icon.classList.add('fa-bars');
@@ -42,6 +106,10 @@ if (menuBtn && navbar) {
     link.addEventListener('click', () => {
       navbar.classList.remove('show');
       menuBtn.setAttribute('aria-expanded', 'false');
+      if (window.innerWidth <= 768) {
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+      }
       const icon = menuBtn.querySelector('i');
       if (icon) {
         icon.classList.add('fa-bars');
@@ -66,6 +134,10 @@ window.addEventListener('scroll', () => {
   if (navbar && navbar.classList.contains('show')) navbar.classList.remove('show');
   if (themeToggler && themeToggler.classList.contains('active')) themeToggler.classList.remove('active');
   if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+  if (window.innerWidth <= 768) {
+    document.body.style.overflowY = 'auto';
+    document.body.style.overflowX = 'hidden';
+  }
 });
 
 // color chooser
